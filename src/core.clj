@@ -4,7 +4,7 @@
 
 (defn extract-instance-name [user-agent-string]
   (println user-agent-string)
-  (let [[_ version host] (re-find #"\((.*) \; \+https:\/\/(.*)\/\)" user-agent-string)]
+  (let [[_ version host] (re-find #"\((.*).?\;.?\+https:\/\/(.*)\/\)" user-agent-string)]
     (if (and version (.contains version "Mastodon"))
       host
       "Mastodon")))
@@ -28,5 +28,5 @@
 
 (comment
   (handle-request
-    {:headers {"user-agent" "http.rb /5.1.0 (Mastodon /4.0.2 ; +https://freiburg.social/) Bot"}})
+    {:headers {"user-agent" "http.rb/5.1.0 (Mastodon/4.0.2; +https://freiburg.social/) Bot"}})
   )
