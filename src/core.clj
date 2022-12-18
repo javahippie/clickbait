@@ -15,7 +15,8 @@
 (defn handle-request [request]
   (let [{:keys [version host]} (extract-client-info request)
         bait (str "Users of " host " are the sexiest!")]
-    {:body
+    {:headers {"content-type" "text/html"}
+     :body
      (str (html [:html
                  [:head [:title bait]]
                  [:body [:h1 bait]]]))}))
@@ -23,7 +24,7 @@
 (srv/run-server #'handle-request
                 {:port 80})
 
-#_(while true
+(while true
   )
 
 
