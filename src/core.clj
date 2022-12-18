@@ -13,16 +13,17 @@
   (extract-instance-name (get headers "user-agent")))
 
 (defn handle-request [request]
-  (let [{:keys [version host]} (extract-client-info request)]
+  (let [{:keys [version host]} (extract-client-info request)
+        bait (str "Users of " host " are the sexiest!")]
     {:body
-     (html [:html
-            [:head [:title "Yeah!"]]
-            [:body [:h1 host]]])}))
+     (str (html [:html
+                 [:head [:title bait]]
+                 [:body [:h1 bait]]]))}))
 
 (srv/run-server #'handle-request
                 {:port 80})
 
-(while true
+#_(while true
   )
 
 
