@@ -3,6 +3,7 @@
             [hiccup2.core :refer [html]]))
 
 (defn extract-instance-name [user-agent-string]
+  (println user-agent-string)
   (let [[_ version host] (re-find #"\((.*) \; \+https:\/\/(.*)\/\)" user-agent-string)]
     (if (and version (.contains version "Mastodon"))
       {:version version
@@ -13,7 +14,7 @@
   (extract-instance-name (get headers "user-agent")))
 
 (defn handle-request [request]
-  (let [{:keys [version host]} (extract-client-info request)
+  (let [{:keys [_ host]} (extract-client-info request)
         bait (str "Users of " host " are the sexiest!")]
     {:headers {"content-type" "text/html"}
      :body
