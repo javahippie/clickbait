@@ -25,8 +25,10 @@
          (str (html [:html
                      [:head [:title bait]]
                      [:body [:h1 bait]]]))})
-      {:status 301
-       :headers {"Location" "https://javahippie.net/clojure/mastodon/2022/12/18/clickbait.html"}})))
+      {:status  301
+       :headers {"Location" "https://javahippie.net/clojure/mastodon/2022/12/18/clickbait.html"
+                 "Pragma"   "no-cache"
+                 "Expires" "Wed, 11 Jan 1984 05:00:00 GMT"}})))
 
 (srv/run-server #'handle-request
                 {:port 80})
