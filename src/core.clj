@@ -13,18 +13,17 @@
   (extract-instance-name (get headers "user-agent")))
 
 (defn handle-request [request]
-  (let [host (extract-client-info request)
-        bait (if host
-               (str "Users of Mastodon instance " host " are the smartest!")
-               (str "Mastodon users are the smartest!"))]
-    {:headers {"content-type" "text/html"}
-     :body
-     (str (html [:html
-                 [:head [:title bait]]
-                 [:body [:h1 bait]
-                  [:p (str "This is unbelievable! A recent study discovered, that " bait)]
-                  [:p "Unfortunately, this is not true. This small page just makes use of the fact, that every Mastodon instance creates its own Link preview, and sends its URL along in the user agent."]
-                  [:p "This was brought to you by " [:a {:href "https://freiburg.social/@javahippie"} "Tim"] " and a simple " [:a {:href "https://github.com/javahippie/clickbait"} "script"]]]]))}))
+  (let [host (extract-client-info request)]
+    (if host
+      (let [bait (str "Users of Mastodon instance " host " are the smartest!")]
+        {:headers {"content-type" "text/html"}
+         :body
+         (str (html [:html
+                     [:head [:title bait]]
+                     [:body [:h1 bait]
+                      [:p (str "This is unbelievable! A recent study discovered, that " bait)]]]))})
+      {:status 301
+       :headers {"Location" "https://javahippie.net"}})))
 
 (srv/run-server #'handle-request
                 {:port 80})
