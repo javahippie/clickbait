@@ -9,7 +9,8 @@
   {:body
    (str (extract-client-info request))})
 
-(comment
-  (srv/run-server #'handle-request
-                  {:port 3000}))
+(srv/run-server #'handle-request
+                {:port 3000})
 
+(while true
+  )
