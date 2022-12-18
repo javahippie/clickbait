@@ -29,7 +29,7 @@
 (srv/run-server #'handle-request
                 {:port 80})
 
-#_(while true)
+(while true)
 
 (comment
   (handle-request
