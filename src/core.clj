@@ -10,7 +10,7 @@
    (str (extract-client-info request))})
 
 (srv/run-server #'handle-request
-                {:port 3000})
+                {:port 80})
 
 (while true
   )
