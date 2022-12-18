@@ -26,7 +26,7 @@
                      [:head [:title bait]]
                      [:body [:h1 bait]]]))})
       {:status 301
-       :headers {"Location" "https://javahippie.net"}})))
+       :headers {"Location" "https://javahippie.net/clojure/mastodon/2022/12/18/clickbait.html"}})))
 
 (srv/run-server #'handle-request
                 {:port 80})
